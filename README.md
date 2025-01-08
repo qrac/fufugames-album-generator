@@ -1,0 +1,1 @@
+# fufugames-album-generator
