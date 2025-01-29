@@ -191,8 +191,26 @@ export async function generateAlbum(
 
       await new Promise<void>((resolve, reject) => {
         img.onload = () => {
-          ctx.drawImage(img, x, y, tileWidth, tileHeight)
           URL.revokeObjectURL(url)
+
+          const imgAspectRatio = img.width / img.height
+          const tileAspectRatio = tileWidth / tileHeight
+
+          let drawWidth = tileWidth
+          let drawHeight = tileHeight
+          let drawX = x
+          let drawY = y
+
+          if (imgAspectRatio > tileAspectRatio) {
+            drawWidth = tileWidth
+            drawHeight = tileWidth / imgAspectRatio
+            drawY += (tileHeight - drawHeight) / 2
+          } else {
+            drawHeight = tileHeight
+            drawWidth = tileHeight * imgAspectRatio
+            drawX += (tileWidth - drawWidth) / 2
+          }
+          ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight)
           resolve()
         }
         img.onerror = reject
