@@ -168,6 +168,7 @@ export async function generateAlbum(
   for (let pageIndex = 0; pageIndex < pageCount; pageIndex++) {
     const startIndex = pageIndex * max
     const pageFiles = files.slice(startIndex, startIndex + max)
+    const pageNumber = numStart + pageIndex
 
     const canvas = document.createElement("canvas")
     const ctx = canvas.getContext("2d")!
@@ -206,12 +207,12 @@ export async function generateAlbum(
     ctx.fillStyle = numColor
     ctx.font = `bold ${numSize}px sans-serif`
     ctx.textAlign = isRight ? "right" : "left"
-    ctx.fillText(String(numStart + pageIndex), textX, textY)
+    ctx.fillText(String(pageNumber), textX, textY)
 
     const pageBlob = await new Promise<Blob>((resolve) =>
       canvas.toBlob((blob) => resolve(blob!))
     )
-    const pageFileName = `page_${pageIndex + 1}.png`
+    const pageFileName = `page_${String(pageNumber).padStart(3, "0")}.png`
 
     if (isSingle && pageIndex === 0) {
       const link = document.createElement("a")

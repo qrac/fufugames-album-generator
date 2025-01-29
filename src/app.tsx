@@ -248,6 +248,7 @@ export default function App() {
                 name="numStart"
                 value={options.numStart}
                 min={1}
+                max={300}
                 onChange={handleSetOptions}
               />
             </label>
@@ -260,21 +261,21 @@ export default function App() {
               <input
                 type="radio"
                 name="numPosition"
-                value="right-bottom"
-                checked={options.numPosition === "right-bottom"}
-                onChange={handleSetOptions}
-              />
-              <span className="text">右下</span>
-            </label>
-            <label className="box is-flex is-middle is-gap-xxs">
-              <input
-                type="radio"
-                name="numPosition"
                 value="left-bottom"
                 checked={options.numPosition === "left-bottom"}
                 onChange={handleSetOptions}
               />
               <span className="text">左下</span>
+            </label>
+            <label className="box is-flex is-middle is-gap-xxs">
+              <input
+                type="radio"
+                name="numPosition"
+                value="right-bottom"
+                checked={options.numPosition === "right-bottom"}
+                onChange={handleSetOptions}
+              />
+              <span className="text">右下</span>
             </label>
           </div>
           <div className="box is-flex is-middle is-gap-sm">
